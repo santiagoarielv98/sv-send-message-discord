@@ -35,9 +35,12 @@ export async function POST(request: Request) {
 function validateBody(body: Record<string, unknown>) {
   const { name, email, message } = body;
 
-  const isNameValid = typeof name === "string" && name.length > 3;
-  const isEmailValid = typeof email === "string" && email.includes("@");
-  const messageIsValid = typeof message === "string" && message.length < 1000;
+  const isNameValid =
+    typeof name === "string" && name.length > 3 && name.length < 50;
+  const isEmailValid =
+    typeof email === "string" && email.includes("@") && email.length < 100;
+  const messageIsValid =
+    typeof message === "string" && message.length > 5 && message.length < 1000;
 
   return isNameValid && isEmailValid && messageIsValid;
 }
