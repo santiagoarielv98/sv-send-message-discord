@@ -1,15 +1,18 @@
 export async function POST(request: Request) {
-  const { name, email, subject = "Sin Asunto", message } = await request.json();
+  const allowedOrigin = process.env.ALLOWED_ORIGIN;
+  const origin =
+    request.headers.get("Origin") || request.headers.get("Referer");
 
-  const isNameValid = typeof name === "string" && name.length > 3;
-  const isEmailValid = typeof email === "string" && email.includes("@");
-  const messageIsValid = typeof message === "string" && message.length < 1000;
+  if (origin !== allowedOrigin) {
+    return new Response("Unauthorized", { status: 401 });
+  }
 
-  const isValid = isNameValid && isEmailValid && messageIsValid;
+  const body = await request.json();
 
-  if (!isValid) {
+  if (!validateBody(body)) {
     return new Response("Missing required fields", { status: 400 });
   }
+  const { name, email, subject = "Sin Asunto", message } = body;
 
   const discordWebhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
@@ -27,4 +30,14 @@ export async function POST(request: Request) {
 
     return new Response("Message sent", { status: 200 });
   } catch (error) {}
+}
+
+function validateBody(body: Record<string, unknown>) {
+  const { name, email, message } = body;
+
+  const isNameValid = typeof name === "string" && name.length > 3;
+  const isEmailValid = typeof email === "string" && email.includes("@");
+  const messageIsValid = typeof message === "string" && message.length < 1000;
+
+  return isNameValid && isEmailValid && messageIsValid;
 }
