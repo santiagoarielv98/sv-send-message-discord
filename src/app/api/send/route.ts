@@ -1,15 +1,5 @@
 export async function POST(request: Request) {
-  const {
-    name,
-    email,
-    subject = "Sin Asunto",
-    message,
-  } = request.body! as unknown as {
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-  };
+  const { name, email, subject = "Sin Asunto", message } = await request.json();
 
   const isNameValid = typeof name === "string" && name.length > 3;
   const isEmailValid = typeof email === "string" && email.includes("@");
@@ -30,7 +20,8 @@ export async function POST(request: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        content: `**Name:** ${name}\n**Email:** ${email}\n**Subject:** ${subject}\n**Message:** ${message}`,
+        username: name,
+        content: `**Asunto:** ${subject}\n**Email:** ${email}\n**Mensaje:**\n${message}`,
       }),
     });
 
