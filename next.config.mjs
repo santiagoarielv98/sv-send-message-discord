@@ -2,7 +2,6 @@
 
 const allowedOrigins = process.env.ALLOW_ORIGIN ?? "http://localhost:3000";
 
-console.log(allowedOrigins);
 const nextConfig = {
   headers: async () => {
     return [
