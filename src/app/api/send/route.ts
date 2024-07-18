@@ -1,11 +1,11 @@
 export async function POST(request: Request) {
-  const allowedOrigin = process.env.ALLOWED_ORIGIN;
+  /*   const allowedOrigin = process.env.ALLOWED_ORIGIN;
   const origin =
     request.headers.get("Origin") || request.headers.get("Referer");
 
   if (origin !== allowedOrigin) {
     return new Response("Unauthorized", { status: 401 });
-  }
+  } */
 
   const body = await request.json();
 

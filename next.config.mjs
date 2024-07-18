@@ -1,10 +1,8 @@
 /** @type {import('next').NextConfig} */
 
-const allowedOrigins =
-  typeof process.env.ALLOW_ORIGIN === "string"
-    ? process.env.ALLOW_ORIGIN.split(",")
-    : "http://localhost:3000";
+const allowedOrigins = process.env.ALLOW_ORIGIN ?? "http://localhost:3000";
 
+console.log(allowedOrigins);
 const nextConfig = {
   headers: async () => {
     return [
