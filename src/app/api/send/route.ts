@@ -28,11 +28,13 @@ function validateBody(body: Record<string, unknown>) {
   const { name, email, message } = body;
 
   const isNameValid =
-    typeof name === "string" && name.length > 3 && name.length < 50;
+    typeof name === "string" && name.length >= 3 && name.length <= 50;
   const isEmailValid =
-    typeof email === "string" && email.includes("@") && email.length < 100;
+    typeof email === "string" && email.includes("@") && email.length <= 100;
   const messageIsValid =
-    typeof message === "string" && message.length > 5 && message.length < 1000;
+    typeof message === "string" &&
+    message.length >= 5 &&
+    message.length <= 1000;
 
   return isNameValid && isEmailValid && messageIsValid;
 }
