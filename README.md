@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# **Next.js Discord Webhook API**
 
-## Getting Started
+Esta API, creada con Next.js, permite enviar mensajes a un canal de Discord utilizando un webhook. Es utilizada en el formulario de contacto de mi portafolio para notificar sobre nuevos mensajes de los usuarios.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## **Tabla de Contenidos**
+1. [Características](#características)
+2. [Tecnologías Utilizadas](#tecnologías-utilizadas)
+3. [Requisitos Previos](#requisitos-previos)
+4. [Instalación](#instalación)
+5. [Uso](#uso)
+6. [Configuración](#configuración)
+7. [Contribuciones](#contribuciones)
+8. [Licencia](#licencia)
+9. [Contacto](#contacto)
+
+---
+
+## **Características**
+- 🚀 Enviar mensajes al canal de Discord mediante un webhook.
+- 🔐 Configuración segura del webhook a través de variables de entorno.
+- 🌐 Endpoint API listo para integrarse con aplicaciones frontend o sistemas de terceros.
+
+---
+
+## **Tecnologías Utilizadas**
+- **Framework**: Next.js
+- **Lenguaje**: TypeScript (opcional: JavaScript)
+- **Integración**: Discord Webhooks
+
+---
+
+## **Requisitos Previos**
+1. Node.js (v18 o superior).
+2. Una URL de webhook generada en Discord:
+   - En el servidor de Discord, ve a **Configuración del canal > Integraciones > Webhooks**.
+   - Crea un nuevo webhook y copia la URL.
+
+---
+
+## **Instalación**
+Clona este repositorio e instala las dependencias necesarias:
+
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/santiagoarielv98/sv-send-message-discord.git
+   cd sv-send-message-discord
+   ```
+2. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+3. Configura las variables de entorno.
+
+---
+
+## **Configuración**
+Copiar el archivo `.env.example` y renombrarlo a `.env`. Luego, reemplazar el valor de `DISCORD_WEBHOOK_URL` con la URL de tu webhook de Discord.
+
+```env
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/xxxxxxxx/yyyyyyyy
+
+ALLOW_ORIGIN=https://example.com # Opcional: URL permitida para CORS
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## **Uso**
+1. Inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+2. Realiza una solicitud POST al endpoint `/api/send` con el siguiente cuerpo JSON:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```json
+{
+    "name": "Nombre del Remitente",
+    "email": "",
+    "subject": "Asunto del Mensaje",
+    "message": "¡Hola, Discord! 👋",
+}
+```
 
-## Learn More
+3. Si el webhook está configurado correctamente, recibirás el mensaje en tu canal de Discord.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## **Contribuciones**
+Si deseas mejorar esta función o agregar nuevas características, sigue estos pasos:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Haz un fork del proyecto.
+2. Crea una nueva rama (`git checkout -b feature/nueva-caracteristica`).
+3. Realiza los cambios y confirma los commits (`git commit -m 'Agregado soporte para...'`).
+4. Haz push de los cambios a tu rama (`git push origin feature/nueva-caracteristica`).
+5. Abre un Pull Request.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## **Licencia**
+Este proyecto está licenciado bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+## **Contacto**
+👤 **[Santiago Villanueva](https://linkedin.com/in/santiagoarielv/)**  
+📧 [santiagoarielv98@gmail.com](mailto:santiagoarielv98@gmail.com)  
+🌐 [Portafolio](https://sv-dev.tech)
