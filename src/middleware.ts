@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Ratelimit } from "@upstash/ratelimit";
-import { kv } from "@vercel/kv";
+// import { Ratelimit } from "@upstash/ratelimit";
+// import { kv } from "@vercel/kv";
 
-const ratelimit = new Ratelimit({
-  redis: kv,
-  limiter: Ratelimit.slidingWindow(5, "60 s"),
-});
+// const ratelimit = new Ratelimit({
+//   redis: kv,
+//   limiter: Ratelimit.slidingWindow(5, "60 s"),
+// });
 
 export const config = {
   matcher: "/api/send",
