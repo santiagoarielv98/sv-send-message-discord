@@ -20,6 +20,7 @@ export default async function middleware(request: NextRequest) {
       ? NextResponse.next()
       : NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
   } catch (error) {
+    console.error(error);
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
