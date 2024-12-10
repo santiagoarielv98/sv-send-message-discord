@@ -12,10 +12,18 @@ export const config = {
 };
 
 export default async function middleware(request: NextRequest) {
-  const ip = request.ip ?? "127.0.0.1";
-  const { success } = await ratelimit.limit(ip);
-
-  return success
+  try {
+    const ip = request.ip ?? "127.0.0.1";
+    const { success } = await ratelimit.limit(ip);
+    
+    return success
     ? NextResponse.next()
     : NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
+  }
+  catch (error) {
+    if(error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
 }
