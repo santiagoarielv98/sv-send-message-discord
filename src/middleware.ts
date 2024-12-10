@@ -13,12 +13,13 @@ export const config = {
 
 export default async function middleware(request: NextRequest) {
   try {
-    const ip = request.ip ?? "127.0.0.1";
-    const { success } = await ratelimit.limit(ip);
+    // const ip = request.ip ?? "127.0.0.1";
+    // const { success } = await ratelimit.limit(ip);
+    // return success
+    //   ? NextResponse.next()
+    //   : NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
 
-    return success
-      ? NextResponse.next()
-      : NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
+    return NextResponse.next();
   } catch (error) {
     console.error(error);
     if (error instanceof Error) {
