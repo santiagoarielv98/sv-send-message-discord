@@ -1,7 +1,7 @@
 import * as Joi from "joi";
 import { NextResponse } from "next/server";
 
-export const discordMessageSchema = Joi.object({
+const discordMessageSchema = Joi.object({
   name: Joi.string().min(3).max(50).required(),
   email: Joi.string().email().max(100).required(),
   subject: Joi.string().max(100),
