@@ -1,4 +1,5 @@
 import * as Joi from "joi";
+import { NextResponse } from "next/server";
 
 export const discordMessageSchema = Joi.object({
   name: Joi.string().min(3).max(50).required(),
@@ -13,10 +14,7 @@ export async function POST(request: Request) {
   const { error, value } = discordMessageSchema.validate(body);
 
   if (error) {
-    return {
-      status: 400,
-      body: error,
-    };
+    return NextResponse.json({ error: error.details }, { status: 400 });
   }
 
   try {
@@ -37,14 +35,14 @@ export async function POST(request: Request) {
       throw new Error("Error al enviar el mensaje a Discord");
     }
 
-    return {
-      status: 200,
-      body: "Mensaje enviado",
-    };
+    return NextResponse.json({ message: "Mensaje enviado" }, { status: 200 });
   } catch (error) {
-    return {
-      status: 500,
-      body: error,
-    };
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+    return NextResponse.json(
+      { error: "Error al enviar el mensaje a Discord" },
+      { status: 500 },
+    );
   }
 }
